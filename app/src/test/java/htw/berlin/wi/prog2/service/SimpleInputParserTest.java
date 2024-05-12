@@ -15,7 +15,7 @@ class SimpleInputParserTest {
     @DisplayName("can detect ingredients in text input")
     void ingredientsFromInput() {
         // System under test (SUT)
-        SimpleInputParser parser = new SimpleInputParser();
+        InputParser parser = new SimpleInputParser();
 
         // Test-Daten
         String input = "Ich hätte gerne einen Ciabatta Burger mit Rindfleisch, Tomatenscheiben und Mayo.";
