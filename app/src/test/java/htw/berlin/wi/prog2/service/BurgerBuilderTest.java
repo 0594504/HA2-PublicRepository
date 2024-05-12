@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BurgerBuilderTest {
 
-    private final BurgerBuilder builder  = new BurgerBuilder();
+    private final BurgerBuilder builder = new BurgerBuilder();
 
     private final Ingredient sauce = new Ingredient("Mayo", 0.01, 2000);
     private final Ingredient broetchen = new Ingredient("Brötchen", 0.02, 1000);
@@ -83,5 +83,13 @@ class BurgerBuilderTest {
         assertTrue(Arrays.stream(fields).map(Field::getType).collect(Collectors.toList()).contains(double.class));
     }
 
-    // TODO hier mind. einen Test hinzufügen, der das korrekte Werfen der IllegalBurgerException testet (assertThrows)
+    @Test
+    @DisplayName("should throw IllegalBurgerException if less than two ingredients are used")
+    void testIllegalBurgerException() {
+        builder.add(sauce); // Adding only one ingredient
+        assertThrows(IllegalBurgerException.class, () -> builder.buildPrecomputed(),
+                "Ein Burger muss mindestens zwei Zutaten enthalten.");
+        assertThrows(IllegalBurgerException.class, () -> builder.buildDynamicallyComputed(),
+                "Ein Burger muss mindestens zwei Zutaten enthalten.");
+    }
 }
